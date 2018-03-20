@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>表单form学习</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <form>
+        Firstname:
+        <input type="text" name="firstname">
+        <br> Lastname:
+        <input type="text" name="lastname">
+        <!-- 密码 -->
+        <br> Password:
+        <input type="password" name="password">
+    </form>
+    <form>
+    	<!-- 单选 互斥 -->
+        <input type="radio" name="sex" value="Male">Male
+        <br>
+        <input type="radio" name="sex" value="Female">Female
+    </form>
+    <form>
+    	<!-- 复选 -->
+        <input type="checkbox" name="vehicle" value="Bike">I have a bike
+        <br>
+        <input type="checkbox" name="vehicle" value="Car">I have a car
+        <br>
+    </form>
+    <form name="input" action="http://127.0.0.1:8888/" method="get">
+    	Username:<input type="text" name="user">
+    	<input type="submit" value="提交">
+        <!-- 点击submit之后，会自动发起get请求http://127.0.0.1:8888/?user=xxxx -->
+    </form>
+    <form action="http://127.0.0.1:8888/">
+    	<select name="cars">
+    		<option value="volvo">Volvo</option>
+    		<option value="saab">Saab</option>
+    		<option value="audi">Audi</option>
+    	</select>
+    </form>
+</body>
+
+</html>
