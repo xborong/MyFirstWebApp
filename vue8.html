@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue 事件响应</title>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<meta charset="utf-8">
+
+</head>
+<body>
+	<!-- v-on 可以直接执行一段脚本 -->
+	<div id="demo1">
+		<span>点击次数：{{count}}</span>
+		<button @click="count += 1">点我一下</button>
+	</div>
+	<script>
+		var vm1 = new Vue({
+			el: "#demo1",
+			data: {
+				count: 0
+			}
+		})
+	</script>
+	<br>
+	<div id="demo2">
+		<button @click.once="say('hi')">Say hi</button>
+		<button @click="say('what', $event)">Say what</button>
+	</div>
+	<script type="text/javascript">
+		var vm2 = new Vue({
+			el: "#demo2",
+			methods: {
+				say: function (words, event) {
+					alert(words);
+					alert(event);
+				}
+			}
+		})
+	</script>
+	<br>
+	<!-- 按键修饰符 -->
+	<div id="demo3">
+		<p>输入的是：{{password}}</p>
+		<input v-model='password' v-on:keydown.enter="submit" type="password">
+	</div>
+	<script type="text/javascript">
+		var vm3 = new Vue({
+			el: "#demo3",
+			data: {
+				password:""
+			},
+			methods: {
+				submit: function () {
+					alert(this.password);
+					this.password = '';
+				}
+			}
+		})
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

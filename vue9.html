@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue组件</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <child id="demo1" my-message="hello!"></child>
+    <script type="text/javascript">
+    // 1. props是属性
+    // 2. myMessage 与  my-message 等价 w3c推荐后一种写法
+    Vue.component('child', {
+        // 在 JavaScript 中使用 camelCase
+        props: ['myMessage'],
+        template: '<span>{{ myMessage }}</span>'
+    });
+    var vm1 = new Vue({
+        el: "#demo1"
+    })
+    </script>
+    <br>
+    <!-- 属性绑定到父组件 -->
+    <div id="demo2">
+        <input v-model="presentMsg">
+        <child :my-message="'输入了:'+presentMsg">
+        </child>
+    </div>
+    <script type="text/javascript">
+    var vm2 = new Vue({
+        el: "#demo2",
+        data: {
+            presentMsg: 'Message from parent'
+        }
+    })
+    </script>
+    <div id="demo4">
+        <p v-for='msg in messages'>{{msg}}</p>
+        <message-button @message='handleMessage'></message-button>
+    </div>
+    <script type="text/javascript">
+    Vue.component('message-button', {
+        template: '<div> <input v-model="message"/><button @click="send">Send</button></div>',
+        data: function() {
+            return { message: '你好' };
+        },
+        methods: {
+            send: function() {
+                console.log("send");
+                this.$emit('message', { message: this.message });
+            }
+        }
+    });
+    var vm4 = new Vue({
+        el: "#demo4",
+        data: {
+            messages: ['a']
+        },
+        methods: {
+            handleMessage: function(payload) {
+                console.log("handleMessage");
+                this.messages.push(payload.message);
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

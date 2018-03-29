@@ -14,7 +14,7 @@ http.createServer(function(request, response) {
 			});
 			response.write('404 访问的文件不存在！');
 		} else {
-			console.log(data);
+			// console.log(data);
 			response.write(data);
 		}
 		response.end();

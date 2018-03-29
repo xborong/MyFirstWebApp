@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue 一个对象的v-for</title>
+	<meta charset="utf-8">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<div id="demo1">
+		<ol>
+			<li v-for="(value, key) in person">
+				{{key}} : {{value}}
+			</li>
+		</ol>
+	</div>
+	<script type="text/javascript">
+		var vm1 = new Vue({
+			el: "#demo1",
+			data: {
+				person: {
+					firstName: "谢",
+					lastName: "君强",
+					age: 30
+				}
+			}
+		});
+		setTimeout(function  () {
+			vm1.person = {
+				"姓": "谢",
+				"名": "君强",
+				"年龄": 30
+			}
+		}, 2000);
+	</script>
+</body>
+</html>

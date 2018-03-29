@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue模版语法</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <!-- 插值 双大括号 Mustache-->
+    <!-- 1.文本  -->
+    <div id="app-1">
+        <h2 style="font-size: larger; color: #890244;"> 当前时间: {{message}}</h2>
+    </div>
+    <script type="text/javascript">
+    var vm1 = new Vue({
+        el: "#app-1",
+        data: {
+            message: 20
+        }
+    })
+    var updateTime = function(argument) {
+        vm1.message = Date().toLocaleString();
+        setTimeout(function() {
+            updateTime();
+        }, 1000);
+    }
+    updateTime();
+    </script>
+    <!-- 2.原始html -->
+    <div id="app-2">
+        <p>Using mustaches: {{ rawHtml }}</p>
+        <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+    </div>
+    <script type="text/javascript">
+    var vm2 = new Vue({
+        el: "#app-2",
+        data: {
+            rawHtml: ""
+        }
+    })
+
+    setTimeout(function() {
+        vm2.rawHtml = "<span style='color: #890;' > 一秒钟</span>"
+    }, 1000) // <p>Using v-html directive: <span><span style="color: #890;"> 一秒钟</span></span></p>
+    </script>
+    <!-- v-bind 指令绑定 1.Mustache 不能用于绑定属性，所以有v-bind；2.可以绑定表达式-->
+    <!-- 对最常用的指令v-bind和v-on提供了简写 ":" "@" -->
+    <div id="app-3">
+        <span :title="'北京时间：'+ title">查看时间</span>
+    </div>
+    <script type="text/javascript">
+    var vm3 = new Vue({
+        el: "#app-3",
+        data: {
+            title: Date().toLocaleString()
+        }
+    })
+    </script>
+    <!-- 指令是v-前缀的特殊属性，可以接受一个参数 -->
+    <div id="app-4">
+        <span>{{"点击次数" + count}}</span>
+        <button @click="onButtonClick" style="color: #fff; background-color: #789;width: 60px;height: 30px;border-radius: 3px;">点击</button>
+    </div>
+    <script type="text/javascript">
+    var vm4 = new Vue({
+        el: "#app-4",
+        data: {
+            count: 0,
+        },
+        methods: {
+            onButtonClick: function() {
+                this.count += 1;
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

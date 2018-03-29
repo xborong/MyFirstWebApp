@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue实例</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<h2 id="header" v-bind:title="time">{{text}}</h2>
+<script type="text/javascript">
+	var header = new Vue({
+		el: "#header",
+		data: {
+			text: "初学Vue实例, 我们来看看加载时间",
+			time: "加载时间：" + new Date().toLocaleString()
+		}
+	})
+</script>
+<script type="text/javascript">
+	// 数据绑定
+	var modle = {a: 1};
+	var vm1 = new Vue({
+		data: modle,
+	});
+	modle.a = 2;
+	if (vm1.a == 2) {
+		vm1.a = 3;
+		if (modle.a == 3) {
+			modle.a = 4;
+			if (vm1.$data === modle) {
+				window.alert("数据绑定");
+			}
+		}
+	}
+	// 实例生命周期钩子
+	var vm2 = new Vue({
+		created: function () {
+			console.log(this);
+		}
+	})
+</script>
+</body>
+</html>

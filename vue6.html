@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Class与style绑定</title>
+	<meta charset="utf-8">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<style type="text/css">
+		.style1 {
+			background-color: red;
+			text-align: center;
+		}
+		.style2 {
+			color: blue;
+		}
+		.style3 {
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div id="demo1" :class="{style1:isA, style2: isB, style3: isC}">
+		Vue Class与style绑定
+	</div>
+	<script type="text/javascript">
+		var vm1 = new Vue({
+			el: "#demo1",
+			data: {
+				isA:true,
+				isB:true,
+				isC:true,
+			}
+		})
+	</script>
+	<div id="demo2" :class="classObject">
+		Vue Class与style绑定2
+	</div>
+	<script type="text/javascript">
+		var vm2 = new Vue({
+			el: "#demo2",
+			data: {
+				isA:true,
+				isB:true,
+				isC:true,
+			},
+			computed: {
+				classObject: function () {
+					return {
+						style1: this.isA,
+						style2: this.isB,
+						style3: this.isC
+					}
+				}
+			}
+		});
+		var times = 20;
+		var changeStyle = function (argument) {
+			if (times <= 0) {return;}
+			times--;
+			vm2.isC = !vm2.isC;
+			setTimeout(changeStyle, 500);
+		}
+		changeStyle();
+	</script>
+</body>
+</html>
