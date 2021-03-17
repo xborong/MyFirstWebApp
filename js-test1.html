@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript学习</title>
+</head>
+
+<body>
+    <script>
+        // const o1 = {
+        //     name: 'shaunxie',
+        //     age: 32,
+        //     height: 170
+        // };
+        // const name = 'shaun';
+        // const o2 = {name, ...o1};
+        // const o3 = {...o1, name};
+        // console.log('======1', o2);
+        // console.log('======2', o3);g
+        window.name = 'windoowoeio'
+        class A {
+            constructor() {
+                this.name = 'AAAA';
+            }
+            myF(callback) {
+                console.log(this.name);
+                callback();
+            }
+        }
+
+        class B {
+            constructor() {
+                this.name = 'BBBB';
+            }
+            testF() {
+                console.log(this.name);
+                const a = new A();
+                const name = this.name;
+                a.myF(() => console.log(this.name));
+            }
+        }
+
+        const b = new B();
+        b.testF();
+    </script>
+
+</body>
+
+</html>
