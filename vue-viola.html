@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- 使用 {{}} 绑定内容值 -->
+    <div id="app-1" onclick="change()">
+        {{ message }}
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app-1',
+            data: {
+                message: 1,
+            }
+        });
+        function change() {
+            vm.message += 1;
+        }
+    </script>
+
+    <!-- 使用v-bind 绑定属性值 -->
+    <div id="app-2">
+        <span v-bind:title='message'>
+            鼠标悬停几秒查看此处动态绑定的提示信息
+        </span>
+    </div>
+    <script>
+        const vm2 = new Vue({
+            el: '#app-2',
+            data: {
+                message: `页面加载于 ${new Date().toLocaleDateString()}`
+            }
+        });
+    </script>
+
+    <!-- 使用v-if控制元素显隐 -->
+    <div id="app-3">
+        <p v-if='seen' onclick="hiddenMe()">现在你看到我了</p>
+    </div>
+    <script>
+        const vm3 = new Vue({
+            el: '#app-3',
+            data: {
+                seen: true,
+            }
+        });
+        function hiddenMe() {
+            vm3.seen = false;
+        }
+    </script>
+
+    <!-- 使用v-for进行循环 -->
+    <div id="app-4">
+        <ol>
+            <li v-for='todo in todoList' onclick="changeText(this)">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+    <script>
+        const vm4 = new Vue({
+            el: '#app-4',
+            data: {
+                todoList: [
+                    { text: '学习vue' },
+                    { text: '学习Viola' },
+                    { text: '锻炼身体' }
+                ]
+            }
+        });
+
+        function changeText(el) {
+            el.innerHTML = el.innerHTML + '123';
+            console.log(vm4.todoList[0].text);//没有改变
+        }
+
+    </script>
+
+    <!-- 使用v-on绑定事件 -->
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click='reverseMessage'>反转消息</button>
+    </div>
+    <script>
+        const vm5 = new Vue({
+            el: '#app-5',
+            data: {
+                message: 'hello Vue.js'
+            },
+            methods: {
+                reverseMessage: function () {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+
+    <!-- 使用v-model实现双向绑定 -->
+    <div id="app-6">
+        <p v-on:click='changeInput'>{{ message }}</p>
+        <input type="text" v-model='message'>
+    </div>
+    <script>
+        const vm6 = new Vue({
+            el: '#app-6',
+            data: {
+                message: 'hello vue.js'
+            },
+            methods: {
+                changeInput: function () {
+                    this.message = 'hello word'
+                }
+            }
+        })
+    </script>
+
+    <script>
+
+
+    </script>
+
+    <div id="app-7">
+        <ol>
+            <todo-item v-for='item in todoList' v-bind:todo='item' v-bind:key='item.id'></todo-item>
+        </ol>
+    </div>
+
+    <script>
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>',
+        })
+
+        const vm7 = new Vue({
+            el: '#app-7',
+            data: {
+                todoList: [
+                    { id: 1, text: '学vue' },
+                    { id: 2, text: '学游泳' },
+                    { id: 3, text: '学飞机' },
+                    { id: 4, text: '学滑雪' },
+                ]
+            }
+        });
+    </script>
+
+</body>
+
+</html>
